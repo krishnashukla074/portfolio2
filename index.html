@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-<html lang="en" style=""><head></head><body><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Krishnakant Shukla — Portfolio</title>
 <!-- Google Fonts: Fraunces (Headings), Plus Jakarta Sans (Body), Caveat (Handwritten accents) -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <!-- FontAwesome for clean icons -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
 <style>
@@ -27,12 +27,19 @@
       --font-serif: 'Fraunces', serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-hand: 'Caveat', cursive;
+
+      /* Sky gradients */
       --sky-day-top: #68B0D8;
       --sky-day-mid: #A5D2EB;
       --sky-day-bottom: #FDF5E6;
-      --sky-night-top: #0F172A;
-      --sky-night-mid: #1E293B;
-      --sky-night-bottom: #334155;
+
+      --sky-evening-top: #E07A5F;
+      --sky-evening-mid: #F4A261;
+      --sky-evening-bottom: #FDE2B8;
+
+      --sky-night-top: #09101F;
+      --sky-night-mid: #152238;
+      --sky-night-bottom: #293845;
     }
 
     * {
@@ -53,6 +60,7 @@
       line-height: 1.7;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.8s ease, color 0.8s ease;
     }
 
     /* Subtle Paper Texture Overlay */
@@ -74,7 +82,7 @@
       left: 0;
       right: 0;
       z-index: 100;
-      padding: 1.5rem 3rem;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -105,12 +113,12 @@
     nav.nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .nav-link {
       font-size: 0.95rem;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--text-dark);
       text-decoration: none;
       position: relative;
@@ -133,36 +141,31 @@
       width: 100%;
     }
 
-    /* Day / Night Toggle Button */
+    /* Multi-Mode Toggle Switcher Button */
     .mode-toggle-btn {
-      background: rgba(255, 255, 255, 0.45);
-      border: 1.5px solid rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       padding: 0.45rem 1rem;
       border-radius: 9999px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       font-family: var(--font-sans);
-      font-size: 0.88rem;
-      font-weight: 600;
+      font-size: 0.85rem;
+      font-weight: 700;
       color: var(--text-dark);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
       transition: all 0.35s ease;
+      user-select: none;
     }
 
     .mode-toggle-btn:hover {
       transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.7);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-    }
-
-    .mode-toggle-btn i {
-      font-size: 1rem;
-      color: #334155;
-      transition: transform 0.5s ease, color 0.5s ease;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     }
 
     /* HERO SECTION - Ghibli Painterly Sky */
@@ -174,57 +177,43 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 7rem 3rem 5rem;
+      padding: 7rem 2rem 5rem;
       background: linear-gradient(180deg, var(--sky-day-top) 0%, var(--sky-day-mid) 50%, var(--sky-day-bottom) 100%);
-      transition: background 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: background 0.9s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Night Mode Sky Active */
-    .hero-container.night-mode {
+    /* Mode 2: Evening Mode */
+    body.evening-mode .hero-container {
+      background: linear-gradient(180deg, #D96B43 0%, #E88E56 35%, #F7C08A 70%, #FDF3DF 100%);
+    }
+
+    /* Mode 3: Night Mode */
+    body.night-mode .hero-container {
       background: linear-gradient(180deg, #09101F 0%, #152238 45%, #293845 100%);
     }
 
-    .hero-container.night-mode .brand-name {
-      color: #F8FAFC;
-    }
-    .hero-container.night-mode .brand-hand {
-      color: #FDE047;
-      text-shadow: 0 0 12px rgba(253, 224, 71, 0.5);
-    }
-    .hero-container.night-mode .nav-link {
-      color: #E2E8F0;
-    }
-    .hero-container.night-mode .nav-link::after {
-      background-color: #F8D373;
-    }
-    .hero-container.night-mode .mode-toggle-btn {
-      background: rgba(30, 41, 59, 0.7);
-      border-color: rgba(90, 115, 145, 0.45);
-      color: #F8FAFC;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Celestial Bodies: Sun and Moon */
+    /* Celestial Bodies: Sun, Sunset Sun, and Moon */
     .celestial-body {
       position: absolute;
-      top: 15%;
-      right: 18%;
+      top: 13%;
+      right: 14%;
       width: 110px;
       height: 110px;
       border-radius: 50%;
       pointer-events: none;
       transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 2;
     }
 
     .sun-disc {
       position: absolute;
       inset: 0;
       border-radius: 50%;
-      background: radial-gradient(circle, #FFF4CE 20%, #FBD476 60%, rgba(246, 177, 49, 0) 85%);
-      box-shadow: 0 0 50px rgba(251, 212, 118, 0.65), 0 0 100px rgba(253, 226, 150, 0.4);
+      background: radial-gradient(circle, #FFF9D2 20%, #FBD476 60%, rgba(246, 177, 49, 0) 85%);
+      box-shadow: 0 0 50px rgba(251, 212, 118, 0.75), 0 0 100px rgba(253, 226, 150, 0.45);
       opacity: 1;
       transform: scale(1) translateY(0);
-      transition: opacity 1s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: opacity 0.8s ease, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.8s ease;
     }
 
     .moon-disc {
@@ -232,19 +221,315 @@
       inset: 0;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #FFFDF2 25%, #E2E8F0 70%, #94A3B8 100%);
-      box-shadow: 0 0 35px rgba(255, 255, 255, 0.5), 0 0 80px rgba(226, 232, 240, 0.3);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.6), 0 0 80px rgba(226, 232, 240, 0.35);
       opacity: 0;
-      transform: scale(0.6) translateY(30px) rotate(-15deg);
-      transition: opacity 1s ease, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transform: scale(0.6) translateY(40px) rotate(-15deg);
+      transition: opacity 0.8s ease, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .hero-container.night-mode .sun-disc {
-      opacity: 0;
-      transform: scale(0.6) translateY(50px);
+    /* Celestial transformations */
+    body.evening-mode .sun-disc {
+      opacity: 1;
+      background: radial-gradient(circle, #FFE4A0 20%, #F59E0B 55%, rgba(239, 68, 68, 0.25) 85%);
+      box-shadow: 0 0 65px rgba(245, 158, 11, 0.8), 0 0 120px rgba(251, 146, 60, 0.6);
+      transform: scale(1.15) translateY(28px);
     }
-    .hero-container.night-mode .moon-disc {
+    body.evening-mode .moon-disc {
+      opacity: 0;
+      transform: scale(0.5) translateY(50px);
+    }
+
+    body.night-mode .sun-disc {
+      opacity: 0;
+      transform: scale(0.5) translateY(50px);
+    }
+    body.night-mode .moon-disc {
       opacity: 1;
       transform: scale(1) translateY(0) rotate(0deg);
+    }
+
+    /* DAY MODE: Dynamic Natural Birds Flight with Dual-Wing Articulation & Rich Colors */
+    .day-birds-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+      opacity: 1;
+      transition: opacity 0.6s ease;
+    }
+    body.evening-mode .day-birds-layer,
+    body.night-mode .day-birds-layer {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Individual bird container */
+    .sky-bird-actor {
+      position: absolute;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 8px rgba(18, 48, 70, 0.22));
+      will-change: transform;
+    }
+
+    /* Dual-Wing Articulation & Flapping Synchronized with Burst-Glide Cycles */
+    .bird-wing-left {
+      transform-origin: 24px 18px;
+      animation: dualFlapLeft 0.42s ease-in-out infinite alternate;
+    }
+    .bird-wing-right {
+      transform-origin: 24px 18px;
+      animation: dualFlapRight 0.42s ease-in-out infinite alternate;
+    }
+
+    /* Wing flapping keyframes with anatomical perspective depth */
+    @keyframes dualFlapLeft {
+      0% {
+        transform: rotate(-38deg) scaleY(1.08) skewX(4deg);
+      }
+      25% {
+        transform: rotate(-10deg) scaleY(0.92);
+      }
+      65% {
+        transform: rotate(32deg) scaleY(0.68) skewX(-6deg);
+      }
+      100% {
+        transform: rotate(44deg) scaleY(0.52) translateY(2.5px);
+      }
+    }
+
+    @keyframes dualFlapRight {
+      0% {
+        transform: rotate(38deg) scaleY(1.08) skewX(-4deg);
+      }
+      25% {
+        transform: rotate(10deg) scaleY(0.92);
+      }
+      65% {
+        transform: rotate(-32deg) scaleY(0.68) skewX(6deg);
+      }
+      100% {
+        transform: rotate(-44deg) scaleY(0.52) translateY(2.5px);
+      }
+    }
+
+    /* Natural body pitch/banking rhythm during wing strokes */
+    .bird-body-group {
+      animation: birdBodyBob 0.42s ease-in-out infinite alternate;
+      transform-origin: 24px 19px;
+    }
+    @keyframes birdBodyBob {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-1.8px) rotate(-1.5deg); }
+    }
+
+    /* Bird 1: Vibrant Cerulean / Indigo Bluebird - Lead flyer */
+    .sky-bird-1 {
+      top: 13%;
+      left: -12%;
+      width: 48px;
+      height: 38px;
+      animation: flightTrajectory1 18s cubic-bezier(0.38, 0.05, 0.48, 0.95) infinite;
+    }
+    .sky-bird-1 .bird-wing-left,
+    .sky-bird-1 .bird-wing-right {
+      animation-duration: 0.38s;
+    }
+    .sky-bird-1 .bird-body-group {
+      animation-duration: 0.38s;
+    }
+
+    /* Bird 2: Crimson / Scarlet Cardinal - High agile swooper */
+    .sky-bird-2 {
+      top: 8%;
+      left: -22%;
+      width: 40px;
+      height: 32px;
+      animation: flightTrajectory2 22s cubic-bezier(0.35, 0.08, 0.45, 0.92) infinite 3.5s;
+    }
+    .sky-bird-2 .bird-wing-left,
+    .sky-bird-2 .bird-wing-right {
+      animation-duration: 0.34s;
+    }
+    .sky-bird-2 .bird-body-group {
+      animation-duration: 0.34s;
+    }
+
+    /* Bird 3: Sunlit Amber / Golden Oriole - Gliding mid altitude */
+    .sky-bird-3 {
+      top: 24%;
+      left: -16%;
+      width: 44px;
+      height: 35px;
+      animation: flightTrajectory3 20s cubic-bezier(0.42, 0.04, 0.52, 0.96) infinite 7s;
+    }
+    .sky-bird-3 .bird-wing-left,
+    .sky-bird-3 .bird-wing-right {
+      animation-duration: 0.46s;
+    }
+    .sky-bird-3 .bird-body-group {
+      animation-duration: 0.46s;
+    }
+
+    /* Bird 4: Emerald / Teal Parakeet - Lower graceful wave */
+    .sky-bird-4 {
+      top: 31%;
+      left: -28%;
+      width: 36px;
+      height: 29px;
+      opacity: 0.95;
+      animation: flightTrajectory4 25s cubic-bezier(0.36, 0.05, 0.45, 0.98) infinite 1.8s;
+    }
+    .sky-bird-4 .bird-wing-left,
+    .sky-bird-4 .bird-wing-right {
+      animation-duration: 0.32s;
+    }
+    .sky-bird-4 .bird-body-group {
+      animation-duration: 0.32s;
+    }
+
+    /* Bird 5: Lavender / Violet Swift - Distant high escort */
+    .sky-bird-5 {
+      top: 17%;
+      left: -34%;
+      width: 32px;
+      height: 26px;
+      opacity: 0.82;
+      animation: flightTrajectory5 27s cubic-bezier(0.4, 0.08, 0.45, 0.95) infinite 9.5s;
+    }
+    .sky-bird-5 .bird-wing-left,
+    .sky-bird-5 .bird-wing-right {
+      animation-duration: 0.4s;
+    }
+    .sky-bird-5 .bird-body-group {
+      animation-duration: 0.4s;
+    }
+
+    /* Organic Flight Trajectories: Multi-Axis Wave + Banking into Wind */
+    @keyframes flightTrajectory1 {
+      0% {
+        transform: translate3d(-10vw, 20px, 0) rotate(5deg) scale(0.95);
+      }
+      20% {
+        transform: translate3d(24vw, -16px, 0) rotate(-4deg) scale(1.02);
+      }
+      42% {
+        transform: translate3d(55vw, 14px, 0) rotate(6deg) scale(1.05);
+      }
+      65% {
+        transform: translate3d(84vw, -22px, 0) rotate(-3deg) scale(1);
+      }
+      88% {
+        transform: translate3d(112vw, 8px, 0) rotate(4deg) scale(0.96);
+      }
+      100% {
+        transform: translate3d(140vw, -12px, 0) rotate(2deg) scale(0.92);
+      }
+    }
+
+    @keyframes flightTrajectory2 {
+      0% {
+        transform: translate3d(-15vw, -8px, 0) rotate(-3deg) scale(0.88);
+      }
+      25% {
+        transform: translate3d(28vw, 22px, 0) rotate(7deg) scale(0.94);
+      }
+      50% {
+        transform: translate3d(66vw, -18px, 0) rotate(-6deg) scale(0.96);
+      }
+      75% {
+        transform: translate3d(102vw, 16px, 0) rotate(5deg) scale(0.92);
+      }
+      100% {
+        transform: translate3d(142vw, -6px, 0) rotate(-2deg) scale(0.85);
+      }
+    }
+
+    @keyframes flightTrajectory3 {
+      0% {
+        transform: translate3d(-12vw, 10px, 0) rotate(4deg) scale(0.92);
+      }
+      30% {
+        transform: translate3d(36vw, -24px, 0) rotate(-5deg) scale(1.04);
+      }
+      58% {
+        transform: translate3d(74vw, 18px, 0) rotate(6deg) scale(1.02);
+      }
+      82% {
+        transform: translate3d(106vw, -10px, 0) rotate(-3deg) scale(0.97);
+      }
+      100% {
+        transform: translate3d(138vw, 14px, 0) rotate(3deg) scale(0.9);
+      }
+    }
+
+    @keyframes flightTrajectory4 {
+      0% {
+        transform: translate3d(-16vw, 14px, 0) rotate(6deg) scale(0.8);
+      }
+      28% {
+        transform: translate3d(30vw, -12px, 0) rotate(-4deg) scale(0.86);
+      }
+      55% {
+        transform: translate3d(68vw, 20px, 0) rotate(7deg) scale(0.88);
+      }
+      80% {
+        transform: translate3d(104vw, -16px, 0) rotate(-5deg) scale(0.85);
+      }
+      100% {
+        transform: translate3d(144vw, 8px, 0) rotate(2deg) scale(0.8);
+      }
+    }
+
+    @keyframes flightTrajectory5 {
+      0% {
+        transform: translate3d(-18vw, -15px, 0) rotate(-4deg) scale(0.74);
+      }
+      35% {
+        transform: translate3d(38vw, 18px, 0) rotate(6deg) scale(0.8);
+      }
+      68% {
+        transform: translate3d(82vw, -16px, 0) rotate(-5deg) scale(0.82);
+      }
+      100% {
+        transform: translate3d(145vw, 10px, 0) rotate(4deg) scale(0.72);
+      }
+    }
+
+    /* EVENING MODE: Falling Cherry Blossom Petals */
+    .evening-petals-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 4;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s ease;
+    }
+    body.evening-mode .evening-petals-layer {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .petal {
+      position: absolute;
+      background: radial-gradient(circle at 40% 40%, #FFD6E0 15%, #FFAAA6 75%, #F0718F 100%);
+      border-radius: 12px 1px 14px 2px;
+      box-shadow: 0 2px 6px rgba(240, 113, 143, 0.35);
+      animation: petalFall linear infinite;
+    }
+    @keyframes petalFall {
+      0% {
+        transform: translate3d(0, -30px, 0) rotate(0deg) scale(0.85);
+        opacity: 0;
+      }
+      15% { opacity: 0.9; }
+      85% { opacity: 0.85; }
+      100% {
+        transform: translate3d(80px, 95vh, 0) rotate(420deg) scale(1);
+        opacity: 0;
+      }
     }
 
     /* Drifting Clouds (Ghibli Fluffy Style) */
@@ -262,7 +547,7 @@
       border-radius: 100px;
       filter: blur(1.5px);
       box-shadow: 0 15px 35px rgba(110, 142, 168, 0.15);
-      transition: background 1.2s ease, opacity 1.2s ease;
+      transition: background 0.8s ease, box-shadow 0.8s ease;
     }
 
     .cloud::before, .cloud::after {
@@ -279,18 +564,8 @@
       left: -15%;
       animation: driftSlow 45s linear infinite;
     }
-    .cloud-1::before {
-      width: 90px;
-      height: 90px;
-      top: -45px;
-      left: 35px;
-    }
-    .cloud-1::after {
-      width: 75px;
-      height: 75px;
-      top: -30px;
-      left: 100px;
-    }
+    .cloud-1::before { width: 90px; height: 90px; top: -45px; left: 35px; }
+    .cloud-1::after { width: 75px; height: 75px; top: -30px; left: 100px; }
 
     .cloud-2 {
       width: 280px;
@@ -300,18 +575,8 @@
       opacity: 0.75;
       animation: driftMedium 35s linear infinite 12s;
     }
-    .cloud-2::before {
-      width: 120px;
-      height: 120px;
-      top: -60px;
-      left: 45px;
-    }
-    .cloud-2::after {
-      width: 95px;
-      height: 95px;
-      top: -40px;
-      left: 135px;
-    }
+    .cloud-2::before { width: 120px; height: 120px; top: -60px; left: 45px; }
+    .cloud-2::after { width: 95px; height: 95px; top: -40px; left: 135px; }
 
     .cloud-3 {
       width: 180px;
@@ -321,55 +586,42 @@
       opacity: 0.6;
       animation: driftFast 28s linear infinite 5s;
     }
-    .cloud-3::before {
-      width: 70px;
-      height: 70px;
-      top: -35px;
-      left: 30px;
-    }
-    .cloud-3::after {
-      width: 60px;
-      height: 60px;
-      top: -25px;
-      left: 80px;
-    }
+    .cloud-3::before { width: 70px; height: 70px; top: -35px; left: 30px; }
+    .cloud-3::after { width: 60px; height: 60px; top: -25px; left: 80px; }
 
-    .hero-container.night-mode .cloud {
+    body.evening-mode .cloud {
+      background: rgba(255, 230, 215, 0.82);
+      box-shadow: 0 12px 30px rgba(224, 122, 95, 0.22);
+    }
+    body.night-mode .cloud {
       background: rgba(43, 62, 85, 0.4);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     }
 
-    @keyframes driftSlow {
-      0% { transform: translateX(0vw); }
-      100% { transform: translateX(130vw); }
-    }
-    @keyframes driftMedium {
-      0% { transform: translateX(0vw); }
-      100% { transform: translateX(140vw); }
-    }
-    @keyframes driftFast {
-      0% { transform: translateX(0vw); }
-      100% { transform: translateX(135vw); }
-    }
+    @keyframes driftSlow { 0% { transform: translateX(0vw); } 100% { transform: translateX(130vw); } }
+    @keyframes driftMedium { 0% { transform: translateX(0vw); } 100% { transform: translateX(140vw); } }
+    @keyframes driftFast { 0% { transform: translateX(0vw); } 100% { transform: translateX(135vw); } }
 
-    /* Night Sky Stars & Fireflies Canvas */
+    /* NIGHT MODE: Stars & Fireflies */
     .night-sky-particles {
       position: absolute;
       inset: 0;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 1.2s ease;
+      visibility: hidden;
+      transition: opacity 0.8s ease;
       z-index: 2;
     }
-    .hero-container.night-mode .night-sky-particles {
+    body.night-mode .night-sky-particles {
       opacity: 1;
+      visibility: visible;
     }
 
     .star {
       position: absolute;
       background: #FFFFFF;
       border-radius: 50%;
-      box-shadow: 0 0 4px #FFFFFF;
+      box-shadow: 0 0 5px #FFFFFF;
       animation: starTwinkle 3s ease-in-out infinite alternate;
     }
     @keyframes starTwinkle {
@@ -388,8 +640,8 @@
     }
     @keyframes fireflyFloat {
       0% { transform: translate(0, 0) scale(0.6); opacity: 0.3; }
-      50% { transform: translate(30px, -40px) scale(1.1); opacity: 0.9; }
-      100% { transform: translate(-20px, -80px) scale(0.7); opacity: 0.4; }
+      50% { transform: translate(30px, -40px) scale(1.1); opacity: 0.95; }
+      100% { transform: translate(-20px, -80px) scale(0.4); opacity: 0.4; }
     }
 
     /* Rolling Hills Background Silhouette */
@@ -409,22 +661,17 @@
       display: block;
     }
 
-    .hill-back {
-      fill: #8BB08A;
-      transition: fill 1.2s ease;
-    }
-    .hill-mid {
-      fill: #5A7E5E;
-      transition: fill 1.2s ease;
-    }
-    .hill-front {
-      fill: #34543D;
-      transition: fill 1.2s ease;
-    }
+    .hill-back { fill: #8BB08A; transition: fill 0.8s ease; }
+    .hill-mid { fill: #5A7E5E; transition: fill 0.8s ease; }
+    .hill-front { fill: #34543D; transition: fill 0.8s ease; }
 
-    .hero-container.night-mode .hill-back { fill: #1B2C24; }
-    .hero-container.night-mode .hill-mid { fill: #13221C; }
-    .hero-container.night-mode .hill-front { fill: #0B1612; }
+    body.evening-mode .hill-back { fill: #C47A5A; }
+    body.evening-mode .hill-mid { fill: #9E5338; }
+    body.evening-mode .hill-front { fill: #5C2D20; }
+
+    body.night-mode .hill-back { fill: #1B2C24; }
+    body.night-mode .hill-mid { fill: #13221C; }
+    body.night-mode .hill-front { fill: #0B1612; }
 
     /* Hero Main Content */
     .hero-inner {
@@ -447,8 +694,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(220, 210, 195, 0.8);
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(220, 210, 195, 0.85);
       padding: 0.35rem 0.9rem;
       border-radius: 9999px;
       font-size: 0.85rem;
@@ -460,11 +707,17 @@
       transition: all 0.5s ease;
     }
 
-    .hero-container.night-mode .hero-badge {
-      background: rgba(21, 34, 56, 0.82);
-      border-color: rgba(90, 115, 145, 0.6);
+    body.evening-mode .hero-badge {
+      background: rgba(255, 245, 235, 0.85);
+      border-color: rgba(244, 162, 97, 0.6);
+      color: #9C4221;
+    }
+
+    body.night-mode .hero-badge {
+      background: rgba(15, 23, 42, 0.85);
+      border-color: rgba(125, 211, 252, 0.6);
       color: #BAE6FD;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     }
 
     .hero-title {
@@ -478,9 +731,14 @@
       transition: color 0.5s ease, text-shadow 0.5s ease;
     }
 
-    .hero-container.night-mode .hero-title {
-      color: #FEF3C7;
-      text-shadow: 0 0 20px rgba(254, 243, 199, 0.3), 0 2px 8px rgba(0, 0, 0, 0.4);
+    body.evening-mode .hero-title {
+      color: #381E15;
+      text-shadow: 0 1px 8px rgba(255, 235, 215, 0.6);
+    }
+
+    body.night-mode .hero-title {
+      color: #FFFFFF;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.35), 0 2px 10px rgba(0, 0, 0, 0.6);
     }
 
     .hero-tagline {
@@ -493,8 +751,13 @@
       transition: color 0.5s ease;
     }
 
-    .hero-container.night-mode .hero-tagline {
-      color: #E2E8F0;
+    body.evening-mode .hero-tagline {
+      color: #8C4027;
+    }
+
+    body.night-mode .hero-tagline {
+      color: #FDE68A;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     .hero-description {
@@ -505,8 +768,13 @@
       transition: color 0.5s ease;
     }
 
-    .hero-container.night-mode .hero-description {
-      color: #CBD5E1;
+    body.evening-mode .hero-description {
+      color: #523126;
+    }
+
+    body.night-mode .hero-description {
+      color: #E2E8F0;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     }
 
     .hero-actions {
@@ -537,13 +805,22 @@
       box-shadow: 0 6px 20px rgba(43, 66, 52, 0.35);
     }
 
-    .hero-container.night-mode .btn-primary {
-      background-color: #E2B348;
-      color: #0F172A;
-      box-shadow: 0 4px 15px rgba(226, 179, 72, 0.3);
+    body.evening-mode .btn-primary {
+      background-color: #D96B43;
+      box-shadow: 0 4px 14px rgba(217, 107, 67, 0.3);
     }
-    .hero-container.night-mode .btn-primary:hover {
-      background-color: #F3C35C;
+    body.evening-mode .btn-primary:hover {
+      background-color: #BF532B;
+    }
+
+    body.night-mode .btn-primary {
+      background-color: #F59E0B;
+      color: #0F172A;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+    }
+    body.night-mode .btn-primary:hover {
+      background-color: #FBBF24;
     }
 
     .social-pill-group {
@@ -553,8 +830,8 @@
     }
 
     .social-pill {
-      background: rgba(255, 255, 255, 0.65);
-      border: 1px solid rgba(220, 210, 195, 0.8);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(220, 210, 195, 0.85);
       color: var(--text-dark);
       padding: 0.65rem 1rem;
       border-radius: 9999px;
@@ -576,14 +853,26 @@
       color: var(--accent-green);
     }
 
-    .hero-container.night-mode .social-pill {
-      background: rgba(30, 41, 59, 0.7);
-      border-color: rgba(71, 85, 105, 0.6);
-      color: #E2E8F0;
+    body.evening-mode .social-pill {
+      background: rgba(255, 248, 240, 0.75);
+      border-color: rgba(230, 180, 150, 0.7);
+      color: #4A2B20;
     }
-    .hero-container.night-mode .social-pill:hover {
-      background: rgba(51, 65, 85, 0.9);
-      color: #F8D373;
+    body.evening-mode .social-pill:hover {
+      border-color: #D96B43;
+      color: #D96B43;
+    }
+
+    body.night-mode .social-pill {
+      background: rgba(30, 41, 59, 0.82);
+      border-color: rgba(100, 116, 139, 0.65);
+      color: #F8FAFC;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    body.night-mode .social-pill:hover {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: #FDE047;
+      color: #FDE047;
     }
 
     /* Hero Right Visuals: Portrait & Interactive Character Workbench */
@@ -616,7 +905,7 @@
       transform: scale(1.03) rotate(1deg);
     }
 
-    .hero-container.night-mode .portrait-image-container {
+    body.night-mode .portrait-image-container {
       border-color: #334155;
       box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
     }
@@ -654,7 +943,7 @@
       position: relative;
       width: 100%;
       max-width: 440px;
-      background: rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.85);
       border: 1.5px solid rgba(220, 210, 195, 0.9);
       border-radius: 24px;
       padding: 1.35rem 1.6rem 1.1rem;
@@ -664,7 +953,12 @@
       cursor: crosshair;
     }
 
-    .hero-container.night-mode .stickman-workbench {
+    body.evening-mode .stickman-workbench {
+      background: rgba(255, 248, 240, 0.88);
+      border-color: rgba(235, 190, 160, 0.75);
+    }
+
+    body.night-mode .stickman-workbench {
       background: rgba(18, 28, 45, 0.88);
       border-color: rgba(90, 115, 145, 0.55);
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
@@ -688,7 +982,7 @@
       transition: color 0.5s ease;
     }
 
-    .hero-container.night-mode .workbench-status {
+    body.night-mode .workbench-status {
       color: #E2E8F0;
     }
 
@@ -789,7 +1083,6 @@
       100% { opacity: 0; transform: translateY(-22px) scale(0.9); }
     }
 
-    /* Natural, Smooth Wrist & Finger Typing Cadence (replacing jitter) */
     .char-arm-l {
       transform-origin: 130px 100px;
       animation: smoothTypingArmL 2.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
@@ -802,39 +1095,19 @@
     }
 
     @keyframes smoothTypingArmL {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      20% {
-        transform: translateY(-1.5px) rotate(-1deg);
-      }
-      45% {
-        transform: translateY(0.5px) rotate(0.5deg);
-      }
-      70% {
-        transform: translateY(-2px) rotate(-0.8deg);
-      }
-      85% {
-        transform: translateY(-0.5px) rotate(0.2deg);
-      }
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      20% { transform: translateY(-1.5px) rotate(-1deg); }
+      45% { transform: translateY(0.5px) rotate(0.5deg); }
+      70% { transform: translateY(-2px) rotate(-0.8deg); }
+      85% { transform: translateY(-0.5px) rotate(0.2deg); }
     }
 
     @keyframes smoothTypingArmR {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      25% {
-        transform: translateY(-2px) rotate(0.8deg);
-      }
-      50% {
-        transform: translateY(-0.5px) rotate(-0.3deg);
-      }
-      75% {
-        transform: translateY(-1.8px) rotate(1deg);
-      }
-      90% {
-        transform: translateY(0.5px) rotate(-0.5deg);
-      }
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-2px) rotate(0.8deg); }
+      50% { transform: translateY(-0.5px) rotate(-0.3deg); }
+      75% { transform: translateY(-1.8px) rotate(1deg); }
+      90% { transform: translateY(0.5px) rotate(-0.5deg); }
     }
 
     .head-rig {
@@ -862,7 +1135,6 @@
       50% { opacity: 1; filter: drop-shadow(0 0 8px #93C5FD); }
     }
 
-    /* Paused / Alerted State via Class (applied on hover / tracking): Arms rest calmly without jitter */
     .stickman-workbench.is-alerted .char-arm-l,
     .stickman-workbench.is-alerted .char-arm-r {
       animation-play-state: paused !important;
@@ -889,6 +1161,7 @@
     .content-section {
       padding: 6.5rem 2rem;
       position: relative;
+      transition: background-color 0.8s ease;
     }
 
     .section-container {
@@ -919,9 +1192,9 @@
       position: relative;
       display: inline-block;
       padding-bottom: 0.65rem;
+      transition: color 0.5s ease;
     }
 
-    /* Underline that draws in when visible */
     .section-title::after {
       content: '';
       position: absolute;
@@ -946,6 +1219,7 @@
       padding: 3rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
       position: relative;
+      transition: all 0.5s ease;
     }
 
     .about-lead {
@@ -954,12 +1228,14 @@
       line-height: 1.7;
       color: var(--text-dark);
       margin-bottom: 1.5rem;
+      transition: color 0.5s ease;
     }
 
     .about-details {
       color: var(--text-muted);
       font-size: 1.05rem;
       line-height: 1.8;
+      transition: color 0.5s ease;
     }
 
     .handwritten-stamp {
@@ -1025,6 +1301,7 @@
       font-size: 0.95rem;
       color: var(--text-muted);
       font-style: italic;
+      transition: color 0.5s ease;
     }
 
     /* FOCUS / WHAT I'M WORKING ON */
@@ -1065,12 +1342,14 @@
       color: var(--text-dark);
       margin-bottom: 0.75rem;
       line-height: 1.3;
+      transition: color 0.5s ease;
     }
 
     .focus-desc {
       font-size: 0.98rem;
       color: var(--text-muted);
       line-height: 1.65;
+      transition: color 0.5s ease;
     }
 
     /* CONTACT / FOOTER */
@@ -1078,6 +1357,7 @@
       background: #F3ECE0;
       border-top: 1px solid var(--border-color);
       padding: 6rem 2rem 4rem;
+      transition: background-color 0.8s ease, border-color 0.8s ease;
     }
 
     .contact-wrapper {
@@ -1092,6 +1372,7 @@
       font-weight: 700;
       color: var(--text-dark);
       margin-bottom: 1rem;
+      transition: color 0.5s ease;
     }
 
     .contact-sub {
@@ -1099,6 +1380,7 @@
       color: var(--text-muted);
       max-width: 540px;
       margin: 0 auto 2.5rem;
+      transition: color 0.5s ease;
     }
 
     .contact-links-grid {
@@ -1141,6 +1423,7 @@
       font-size: 1.45rem;
       color: var(--accent-sage);
       margin-bottom: 1.5rem;
+      transition: color 0.5s ease;
     }
 
     .footer-bottom {
@@ -1151,6 +1434,99 @@
       align-items: center;
       font-size: 0.9rem;
       color: var(--text-light);
+      transition: border-color 0.5s ease, color 0.5s ease;
+    }
+
+    /* THEME OVERRIDES FOR EVENING & NIGHT */
+    /* Evening Theme */
+    body.evening-mode {
+      background-color: #FAF2E8;
+    }
+    body.evening-mode .site-header .brand-name {
+      color: #381E15;
+    }
+    body.evening-mode .mode-toggle-btn {
+      background: rgba(255, 243, 235, 0.85);
+      border-color: rgba(244, 162, 97, 0.7);
+      color: #7C2D12;
+    }
+    body.evening-mode .site-header .nav-link {
+      color: #4A2B20;
+    }
+    body.evening-mode .site-header .nav-link::after {
+      background-color: #D96B43;
+    }
+    body.evening-mode .about-card,
+    body.evening-mode .skill-tag,
+    body.evening-mode .focus-card,
+    body.evening-mode .contact-button {
+      background-color: #FFFDF9;
+      border-color: #F1DECF;
+    }
+    body.evening-mode .contact-section {
+      background-color: #F6E7D9;
+      border-top-color: #EED4C2;
+    }
+
+    /* Night Mode Theme */
+    body.night-mode {
+      background-color: #0B1322;
+      color: #F1F5F9;
+    }
+    body.night-mode .site-header .brand-name {
+      color: #FFFFFF;
+      text-shadow: 0 0 16px rgba(255, 255, 255, 0.45);
+    }
+    body.night-mode .site-header .brand-hand {
+      color: #FDE047;
+      text-shadow: 0 0 12px rgba(253, 224, 71, 0.5);
+    }
+    body.night-mode .site-header .nav-link {
+      color: #E2E8F0;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+    body.night-mode .site-header .nav-link::after {
+      background-color: #FDE047;
+    }
+    body.night-mode .mode-toggle-btn {
+      background: rgba(30, 41, 59, 0.85);
+      border-color: rgba(148, 163, 184, 0.5);
+      color: #FFFFFF;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    }
+    body.night-mode .content-section {
+      background-color: #0B1322 !important;
+    }
+    body.night-mode .section-title {
+      color: #F8FAFC;
+    }
+    body.night-mode .about-card,
+    body.night-mode .skill-tag,
+    body.night-mode .focus-card,
+    body.night-mode .contact-button {
+      background-color: #152238;
+      border-color: #243550;
+      color: #F1F5F9;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    body.night-mode .about-lead,
+    body.night-mode .focus-title,
+    body.night-mode .contact-title {
+      color: #F8FAFC;
+    }
+    body.night-mode .about-details,
+    body.night-mode .focus-desc,
+    body.night-mode .skills-note,
+    body.night-mode .contact-sub {
+      color: #94A3B8;
+    }
+    body.night-mode .contact-section {
+      background-color: #080D18;
+      border-top-color: #1E293B;
+    }
+    body.night-mode .footer-bottom {
+      border-top-color: #1E293B;
+      color: #64748B;
     }
 
     /* Accessibility: Respect prefers-reduced-motion */
@@ -1163,324 +1539,207 @@
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
       }
-      .cloud, .star, .firefly, .data-particle, .char-arm-l, .char-arm-r, .default-head-bob {
+      .cloud, .star, .firefly, .data-particle, .char-arm-l, .char-arm-r, .default-head-bob, .sky-bird-actor, .bird-wing-left, .bird-wing-right, .bird-body-group, .petal {
         animation: none !important;
       }
     }
 
     /* Mobile Responsive Breakpoints */
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       header.site-header {
-        padding: 1.25rem 1.5rem;
+        padding: 0.85rem 1rem !important;
+        flex-wrap: wrap !important;
+        gap: 0.65rem !important;
+        background: rgba(254, 249, 240, 0.82) !important;
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+        border-bottom: 1px solid rgba(232, 225, 213, 0.7) !important;
+      }
+      body.evening-mode header.site-header {
+        background: rgba(250, 242, 232, 0.88) !important;
+        border-bottom-color: rgba(238, 212, 194, 0.8) !important;
+      }
+      body.night-mode header.site-header {
+        background: rgba(15, 23, 42, 0.9) !important;
+        border-bottom-color: rgba(51, 65, 85, 0.55) !important;
+      }
+      .brand-name {
+        font-size: 1.1rem !important;
+      }
+      .brand-hand {
+        font-size: 1rem !important;
       }
       nav.nav-links {
-        gap: 1.25rem;
+        width: 100% !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        gap: 0.4rem !important;
+        overflow-x: auto !important;
+        padding-bottom: 0.2rem !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .nav-link {
+        font-size: 0.86rem !important;
+        white-space: nowrap !important;
+        padding: 0.2rem 0.35rem !important;
+      }
+      .mode-toggle-btn {
+        padding: 0.35rem 0.75rem !important;
+        font-size: 0.78rem !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+      .hero-container {
+        padding: 7rem 1.25rem 3.5rem !important;
+        min-height: auto !important;
+      }
+      .celestial-body {
+        top: 6% !important;
+        right: 6% !important;
+        width: 72px !important;
+        height: 72px !important;
       }
       .hero-inner {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2.5rem;
+        grid-template-columns: 1fr !important;
+        gap: 2.25rem !important;
       }
       .hero-text-block {
-        margin: 0 auto;
+        max-width: 100% !important;
+        text-align: left !important;
+      }
+      .hero-badge {
+        font-size: 0.78rem !important;
+        padding: 0.3rem 0.75rem !important;
+        max-width: 100% !important;
+        white-space: normal !important;
+        line-height: 1.35 !important;
       }
       .hero-title {
-        font-size: 2.6rem;
+        font-size: 2.35rem !important;
+        line-height: 1.18 !important;
+        margin-bottom: 1rem !important;
+      }
+      .hero-tagline {
+        font-size: 1.15rem !important;
+        line-height: 1.45 !important;
+      }
+      .hero-description {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 1.5rem !important;
       }
       .hero-actions {
-        justify-content: center;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.85rem !important;
+      }
+      .btn-primary {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 0.85rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+      .social-pill-group {
+        width: 100% !important;
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem !important;
+      }
+      .social-pill {
+        padding: 0.6rem 0.4rem !important;
+        justify-content: center !important;
+        font-size: 0.82rem !important;
+      }
+      .hero-visual-card {
+        width: 100% !important;
+        gap: 1.25rem !important;
+      }
+      .portrait-image-container {
+        width: 130px !important;
+        height: 130px !important;
+      }
+      .stickman-workbench {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1.1rem 1rem 0.9rem !important;
+        touch-action: pan-y !important;
+      }
+      .stickman-stage {
+        height: 175px !important;
+      }
+      .stickman-svg {
+        max-height: 175px !important;
+      }
+      .content-section {
+        padding: 4.25rem 1.25rem !important;
+      }
+      .section-header-block {
+        margin-bottom: 2.25rem !important;
+      }
+      .section-title {
+        font-size: 2rem !important;
       }
       .about-card {
-        padding: 2rem 1.5rem;
+        padding: 1.75rem 1.25rem !important;
+        border-radius: 16px !important;
+      }
+      .about-lead {
+        font-size: 1.15rem !important;
+        line-height: 1.6 !important;
+      }
+      .about-details {
+        font-size: 0.96rem !important;
+        line-height: 1.7 !important;
+      }
+      .skills-grid {
+        gap: 0.6rem !important;
+      }
+      .skill-tag {
+        padding: 0.6rem 1rem !important;
+        font-size: 0.92rem !important;
+      }
+      .focus-list {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+      }
+      .focus-card {
+        padding: 1.75rem 1.5rem !important;
+      }
+      .contact-section {
+        padding: 4.5rem 1.25rem 3rem !important;
+      }
+      .contact-title {
+        font-size: 2.1rem !important;
+      }
+      .contact-sub {
+        font-size: 1rem !important;
+        margin-bottom: 2rem !important;
+      }
+      .contact-links-grid {
+        flex-direction: column !important;
+        gap: 0.85rem !important;
+        margin-bottom: 2.75rem !important;
+      }
+      .contact-button {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 0.9rem 1.25rem !important;
+        font-size: 0.95rem !important;
+        word-break: break-all !important;
       }
       .footer-bottom {
-        flex-direction: column;
-        gap: 0.75rem;
+        flex-direction: column !important;
+        gap: 0.6rem !important;
+        text-align: center !important;
       }
     }
   </style>
-<style id="night-mode-contrast-fix">
-  /* Smooth theme transitions on text and backgrounds */
-  .brand-name, .brand-name span, .nav-link, .hero-title, .hero-tagline, .hero-description, .hero-badge, .hero-badge span, .social-pill, .btn-primary, .mode-toggle-btn {
-    transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease, text-shadow 0.5s ease, box-shadow 0.5s ease !important;
-  }
-
-  /* Header & Navbar in Night Mode */
-  .hero-container.night-mode ~ * .site-header .brand-name,
-  body:has(.hero-container.night-mode) .site-header .brand-name,
-  .hero-container.night-mode .site-header .brand-name,
-  header.site-header:has(~ .hero-container.night-mode) .brand-name,
-  .site-header.night-mode .brand-name {
-    color: #FFFFFF !important;
-    text-shadow: 0 0 16px rgba(255, 255, 255, 0.45), 0 2px 8px rgba(0, 0, 0, 0.7) !important;
-  }
-
-  /* Sibling & Child Navbar Link Contrast */
-  header.site-header:has(~ #hero.night-mode) .nav-link,
-  body:has(#hero.night-mode) .site-header .nav-link {
-    color: #F1F5F9 !important;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
-  }
-  header.site-header:has(~ #hero.night-mode) .nav-link:hover,
-  body:has(#hero.night-mode) .site-header .nav-link:hover {
-    color: #FDE047 !important;
-  }
-  header.site-header:has(~ #hero.night-mode) .nav-link::after,
-  body:has(#hero.night-mode) .site-header .nav-link::after {
-    background-color: #FDE047 !important;
-  }
-
-  /* Toggle Button in Night Mode */
-  header.site-header:has(~ #hero.night-mode) .mode-toggle-btn,
-  body:has(#hero.night-mode) .mode-toggle-btn {
-    background: rgba(30, 41, 59, 0.85) !important;
-    border-color: rgba(148, 163, 184, 0.5) !important;
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
-  }
-
-  /* Hero H1 Title */
-  .hero-container.night-mode .hero-title {
-    color: #FFFFFF !important;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.35), 0 2px 10px rgba(0, 0, 0, 0.6) !important;
-  }
-
-  /* Hero Badge */
-  .hero-container.night-mode .hero-badge {
-    background: rgba(15, 23, 42, 0.85) !important;
-    border-color: rgba(125, 211, 252, 0.6) !important;
-    color: #BAE6FD !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4) !important;
-  }
-  .hero-container.night-mode .hero-badge i {
-    color: #38BDF8 !important;
-  }
-
-  /* Tagline & Subhead: Warm Gold / Cream */
-  .hero-container.night-mode .hero-tagline {
-    color: #FDE68A !important;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
-  }
-
-  /* Bio / Intro Description: Bright Crisp Soft Silver */
-  .hero-container.night-mode .hero-description {
-    color: #E2E8F0 !important;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4) !important;
-  }
-
-  /* Buttons & Social Links in Night Mode */
-  .hero-container.night-mode .btn-primary {
-    background-color: #F59E0B !important;
-    color: #0F172A !important;
-    font-weight: 700 !important;
-    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4) !important;
-  }
-  .hero-container.night-mode .btn-primary:hover {
-    background-color: #FBBF24 !important;
-    box-shadow: 0 6px 24px rgba(245, 158, 11, 0.55) !important;
-  }
-  .hero-container.night-mode .social-pill {
-    background: rgba(30, 41, 59, 0.82) !important;
-    border-color: rgba(100, 116, 139, 0.65) !important;
-    color: #F8FAFC !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-  }
-  .hero-container.night-mode .social-pill:hover {
-    background: rgba(51, 65, 85, 0.95) !important;
-    border-color: #FDE047 !important;
-    color: #FDE047 !important;
-  }
-</style><style id="mobile-responsive-enhancements">
-  /* Mobile & Android Viewport Optimizations */
-  @media (max-width: 768px) {
-    header.site-header {
-      padding: 1rem 1.25rem !important;
-      flex-wrap: wrap !important;
-      gap: 0.75rem !important;
-      background: rgba(254, 249, 240, 0.75) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      border-bottom: 1px solid rgba(232, 225, 213, 0.6) !important;
-    }
-    body:has(.hero-container.night-mode) header.site-header,
-    header.site-header.night-mode {
-      background: rgba(15, 23, 42, 0.85) !important;
-      border-bottom-color: rgba(51, 65, 85, 0.5) !important;
-    }
-    .brand-name {
-      font-size: 1.1rem !important;
-    }
-    .brand-hand {
-      font-size: 1.05rem !important;
-    }
-    nav.nav-links {
-      width: 100% !important;
-      justify-content: space-between !important;
-      gap: 0.75rem !important;
-      overflow-x: auto !important;
-      padding-bottom: 0.25rem !important;
-      -webkit-overflow-scrolling: touch;
-    }
-    .nav-link {
-      font-size: 0.88rem !important;
-      white-space: nowrap !important;
-      padding: 0.25rem 0.4rem !important;
-    }
-    .mode-toggle-btn {
-      padding: 0.35rem 0.75rem !important;
-      font-size: 0.8rem !important;
-      white-space: nowrap !important;
-      flex-shrink: 0 !important;
-    }
-    .hero-container {
-      padding: 7.5rem 1.25rem 4rem !important;
-      min-height: auto !important;
-    }
-    .celestial-body {
-      top: 6% !important;
-      right: 6% !important;
-      width: 72px !important;
-      height: 72px !important;
-    }
-    .hero-inner {
-      grid-template-columns: 1fr !important;
-      gap: 2.25rem !important;
-    }
-    .hero-text-block {
-      max-width: 100% !important;
-      text-align: left !important;
-    }
-    .hero-badge {
-      font-size: 0.78rem !important;
-      padding: 0.3rem 0.75rem !important;
-      max-width: 100% !important;
-      white-space: normal !important;
-      line-height: 1.35 !important;
-    }
-    .hero-title {
-      font-size: 2.35rem !important;
-      line-height: 1.18 !important;
-      margin-bottom: 1rem !important;
-    }
-    .hero-tagline {
-      font-size: 1.15rem !important;
-      line-height: 1.45 !important;
-    }
-    .hero-description {
-      font-size: 0.95rem !important;
-      line-height: 1.6 !important;
-      margin-bottom: 1.5rem !important;
-    }
-    .hero-actions {
-      flex-direction: column !important;
-      align-items: stretch !important;
-      gap: 0.85rem !important;
-    }
-    .btn-primary {
-      width: 100% !important;
-      justify-content: center !important;
-      padding: 0.85rem 1.5rem !important;
-      font-size: 1rem !important;
-    }
-    .social-pill-group {
-      width: 100% !important;
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr) !important;
-      gap: 0.5rem !important;
-    }
-    .social-pill {
-      padding: 0.6rem 0.5rem !important;
-      justify-content: center !important;
-      font-size: 0.82rem !important;
-    }
-    .hero-visual-card {
-      width: 100% !important;
-      gap: 1.25rem !important;
-    }
-    .portrait-image-container {
-      width: 130px !important;
-      height: 130px !important;
-    }
-    .stickman-workbench {
-      width: 100% !important;
-      max-width: 100% !important;
-      padding: 1.1rem 1rem 0.9rem !important;
-      touch-action: pan-y !important;
-    }
-    .stickman-stage {
-      height: 175px !important;
-    }
-    .stickman-svg {
-      max-height: 175px !important;
-    }
-    .content-section {
-      padding: 4.25rem 1.25rem !important;
-    }
-    .section-header-block {
-      margin-bottom: 2.25rem !important;
-    }
-    .section-title {
-      font-size: 2rem !important;
-    }
-    .about-card {
-      padding: 1.75rem 1.25rem !important;
-      border-radius: 16px !important;
-    }
-    .about-lead {
-      font-size: 1.15rem !important;
-      line-height: 1.6 !important;
-    }
-    .about-details {
-      font-size: 0.96rem !important;
-      line-height: 1.7 !important;
-    }
-    .skills-grid {
-      gap: 0.6rem !important;
-    }
-    .skill-tag {
-      padding: 0.6rem 1rem !important;
-      font-size: 0.92rem !important;
-    }
-    .focus-list {
-      grid-template-columns: 1fr !important;
-      gap: 1.25rem !important;
-    }
-    .focus-card {
-      padding: 1.75rem 1.5rem !important;
-    }
-    .contact-section {
-      padding: 4.5rem 1.25rem 3rem !important;
-    }
-    .contact-title {
-      font-size: 2.1rem !important;
-    }
-    .contact-sub {
-      font-size: 1rem !important;
-      margin-bottom: 2rem !important;
-    }
-    .contact-links-grid {
-      flex-direction: column !important;
-      gap: 0.85rem !important;
-      margin-bottom: 2.75rem !important;
-    }
-    .contact-button {
-      width: 100% !important;
-      justify-content: center !important;
-      padding: 0.9rem 1.25rem !important;
-      font-size: 0.95rem !important;
-      word-break: break-all !important;
-    }
-    .footer-bottom {
-      flex-direction: column !important;
-      gap: 0.6rem !important;
-      text-align: center !important;
-    }
-  }
-</style>
+</head>
+<body class="day-mode">
 <!-- 1. Header / Navigation -->
 <header class="site-header">
 <a class="brand-name" href="#">
-<span class="">Krishnakant Shukla</span>
+<span>Krishnakant Shukla</span>
 <span class="brand-hand">✦ portfolio</span>
 </a>
 <nav class="nav-links">
@@ -1488,10 +1747,10 @@
 <a class="nav-link" href="#skills">Skills</a>
 <a class="nav-link" href="#focus">Focus</a>
 <a class="nav-link" href="#contact">Contact</a>
-<!-- Day / Night Toggle -->
-<button aria-label="Toggle day and night mode" class="mode-toggle-btn" id="themeToggleBtn">
-<i class="fa-solid fa-moon" id="toggleIcon"></i>
-<span class="" id="toggleText">Night Sky</span>
+<!-- 3-Mode Environmental Switcher Button -->
+<button aria-label="Toggle environmental mode (Day, Evening, Night)" class="mode-toggle-btn" id="modeCycleBtn">
+<span id="modeIcon">☀️</span>
+<span id="modeText">Day Sky</span>
 </button>
 </nav>
 </header>
@@ -1508,14 +1767,186 @@
 <div class="cloud cloud-2"></div>
 <div class="cloud cloud-3"></div>
 </div>
-<!-- Night mode Stars & Fireflies Canvas Container -->
+<!-- ☀️ DAY MODE: Upgraded Naturally Animated Flock of Birds (Dual-Wing Synchronized Flap + Varied Colors: Blue, Red, Amber Gold, Emerald Teal, Lavender) -->
+<div class="day-birds-layer" id="dayBirds">
+<!-- Bird 1: Vibrant Cerulean / Indigo Bluebird -->
+<div class="sky-bird-actor sky-bird-1" title="Bluebird">
+<svg class="bird-svg" fill="none" height="100%" viewbox="0 0 48 38" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="blueWingGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#1E3A8A"></stop>
+<stop offset="50%" stop-color="#2563EB"></stop>
+<stop offset="100%" stop-color="#60A5FA"></stop>
+</lineargradient>
+<lineargradient id="blueBodyGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#1D4ED8"></stop>
+<stop offset="100%" stop-color="#93C5FD"></stop>
+</lineargradient>
+</defs>
+<!-- Left Wing (Far wing with synchronized anatomical flap) -->
+<g class="bird-wing-left">
+<path d="M24 18 C17 10 9 6 2 9 C7 14 16 17 24 18 Z" fill="url(#blueWingGrad)" opacity="0.9"></path>
+<path d="M18 14 C12 9 6 7 2 9 C8 12 14 14 18 14 Z" fill="#93C5FD" opacity="0.65"></path>
+</g>
+<!-- Bird Body, Head & Feathers -->
+<g class="bird-body-group">
+<ellipse cx="24" cy="19" fill="url(#blueBodyGrad)" rx="9" ry="4.2"></ellipse>
+<!-- Tail feathers -->
+<polygon fill="#1E3A8A" points="15,19 8,16 9,21"></polygon>
+<!-- Head and beak -->
+<circle cx="32" cy="18" fill="#1D4ED8" r="3.2"></circle>
+<polygon fill="#F59E0B" points="35,17 38.5,18.5 35,19.5"></polygon>
+</g>
+<!-- Right Wing (Near wing articulated synchronously) -->
+<g class="bird-wing-right">
+<path d="M24 18 C31 10 39 6 46 9 C41 14 32 17 24 18 Z" fill="url(#blueWingGrad)"></path>
+<path d="M30 14 C36 9 42 7 46 9 C40 12 34 14 30 14 Z" fill="#BFDBFE" opacity="0.75"></path>
+</g>
+</svg>
+</div>
+<!-- Bird 2: Scarlet / Crimson Cardinal Red -->
+<div class="sky-bird-actor sky-bird-2" title="Scarlet Robin">
+<svg class="bird-svg" fill="none" height="100%" viewbox="0 0 48 38" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="redWingGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#991B1B"></stop>
+<stop offset="50%" stop-color="#DC2626"></stop>
+<stop offset="100%" stop-color="#F87171"></stop>
+</lineargradient>
+<lineargradient id="redBodyGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#B91C1C"></stop>
+<stop offset="100%" stop-color="#FECACA"></stop>
+</lineargradient>
+</defs>
+<!-- Left Wing (Far) -->
+<g class="bird-wing-left">
+<path d="M24 18 C17 10 9 6 2 9 C7 14 16 17 24 18 Z" fill="url(#redWingGrad)" opacity="0.9"></path>
+<path d="M18 14 C12 9 6 7 2 9 C8 12 14 14 18 14 Z" fill="#FCA5A5" opacity="0.65"></path>
+</g>
+<!-- Body & Head -->
+<g class="bird-body-group">
+<ellipse cx="24" cy="19" fill="url(#redBodyGrad)" rx="8.5" ry="4"></ellipse>
+<polygon fill="#7F1D1D" points="15,19 8,16.5 9,21"></polygon>
+<circle cx="32" cy="18" fill="#991B1B" r="3"></circle>
+<polygon fill="#FDE047" points="34.5,17 38,18.3 34.5,19.3"></polygon>
+</g>
+<!-- Right Wing (Near) -->
+<g class="bird-wing-right">
+<path d="M24 18 C31 10 39 6 46 9 C41 14 32 17 24 18 Z" fill="url(#redWingGrad)"></path>
+<path d="M30 14 C36 9 42 7 46 9 C40 12 34 14 30 14 Z" fill="#FECACA" opacity="0.8"></path>
+</g>
+</svg>
+</div>
+<!-- Bird 3: Sunlit Amber / Golden Oriole Yellow -->
+<div class="sky-bird-actor sky-bird-3" title="Golden Oriole">
+<svg class="bird-svg" fill="none" height="100%" viewbox="0 0 48 38" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="goldWingGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#B45309"></stop>
+<stop offset="55%" stop-color="#F59E0B"></stop>
+<stop offset="100%" stop-color="#FDE047"></stop>
+</lineargradient>
+<lineargradient id="goldBodyGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#D97706"></stop>
+<stop offset="100%" stop-color="#FEF08A"></stop>
+</lineargradient>
+</defs>
+<!-- Left Wing (Far) -->
+<g class="bird-wing-left">
+<path d="M24 18 C17 10 9 6 2 9 C7 14 16 17 24 18 Z" fill="url(#goldWingGrad)" opacity="0.9"></path>
+<path d="M18 14 C12 9 6 7 2 9 C8 12 14 14 18 14 Z" fill="#FEF08A" opacity="0.7"></path>
+</g>
+<!-- Body & Head -->
+<g class="bird-body-group">
+<ellipse cx="24" cy="19" fill="url(#goldBodyGrad)" rx="9" ry="4.2"></ellipse>
+<polygon fill="#92400E" points="15,19 8,16 9,21"></polygon>
+<circle cx="32" cy="18" fill="#D97706" r="3.2"></circle>
+<polygon fill="#EA580C" points="35,17 38.5,18.5 35,19.5"></polygon>
+</g>
+<!-- Right Wing (Near) -->
+<g class="bird-wing-right">
+<path d="M24 18 C31 10 39 6 46 9 C41 14 32 17 24 18 Z" fill="url(#goldWingGrad)"></path>
+<path d="M30 14 C36 9 42 7 46 9 C40 12 34 14 30 14 Z" fill="#FEF9C3" opacity="0.85"></path>
+</g>
+</svg>
+</div>
+<!-- Bird 4: Emerald / Teal Parakeet Green -->
+<div class="sky-bird-actor sky-bird-4" title="Emerald Parakeet">
+<svg class="bird-svg" fill="none" height="100%" viewbox="0 0 48 38" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="emeraldWingGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#065F46"></stop>
+<stop offset="50%" stop-color="#059669"></stop>
+<stop offset="100%" stop-color="#34D399"></stop>
+</lineargradient>
+<lineargradient id="emeraldBodyGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#047857"></stop>
+<stop offset="100%" stop-color="#A7F3D0"></stop>
+</lineargradient>
+</defs>
+<!-- Left Wing (Far) -->
+<g class="bird-wing-left">
+<path d="M24 18 C17 10 9 6 2 9 C7 14 16 17 24 18 Z" fill="url(#emeraldWingGrad)" opacity="0.9"></path>
+<path d="M18 14 C12 9 6 7 2 9 C8 12 14 14 18 14 Z" fill="#6EE7B7" opacity="0.65"></path>
+</g>
+<!-- Body & Head -->
+<g class="bird-body-group">
+<ellipse cx="24" cy="19" fill="url(#emeraldBodyGrad)" rx="8" ry="3.8"></ellipse>
+<polygon fill="#064E3B" points="15,19 8,16.5 9,21"></polygon>
+<circle cx="31" cy="18" fill="#047857" r="3"></circle>
+<polygon fill="#F59E0B" points="34,17 37.5,18.3 34,19.3"></polygon>
+</g>
+<!-- Right Wing (Near) -->
+<g class="bird-wing-right">
+<path d="M24 18 C31 10 39 6 46 9 C41 14 32 17 24 18 Z" fill="url(#emeraldWingGrad)"></path>
+<path d="M30 14 C36 9 42 7 46 9 C40 12 34 14 30 14 Z" fill="#A7F3D0" opacity="0.8"></path>
+</g>
+</svg>
+</div>
+<!-- Bird 5: Lavender / Violet Swift -->
+<div class="sky-bird-actor sky-bird-5" title="Lavender Swallow">
+<svg class="bird-svg" fill="none" height="100%" viewbox="0 0 48 38" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="violetWingGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#4C1D95"></stop>
+<stop offset="50%" stop-color="#7C3AED"></stop>
+<stop offset="100%" stop-color="#C4B5FD"></stop>
+</lineargradient>
+<lineargradient id="violetBodyGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#6D28D9"></stop>
+<stop offset="100%" stop-color="#DDD6FE"></stop>
+</lineargradient>
+</defs>
+<!-- Left Wing (Far) -->
+<g class="bird-wing-left">
+<path d="M24 18 C17 10 9 6 2 9 C7 14 16 17 24 18 Z" fill="url(#violetWingGrad)" opacity="0.9"></path>
+<path d="M18 14 C12 9 6 7 2 9 C8 12 14 14 18 14 Z" fill="#DDD6FE" opacity="0.65"></path>
+</g>
+<!-- Body & Head -->
+<g class="bird-body-group">
+<ellipse cx="24" cy="19" fill="url(#violetBodyGrad)" rx="8" ry="3.6"></ellipse>
+<polygon fill="#3B0764" points="15,19 8,16 9,21"></polygon>
+<circle cx="31" cy="18" fill="#5B21B6" r="2.8"></circle>
+<polygon fill="#FBBF24" points="33.8,17.2 37,18.3 33.8,19.2"></polygon>
+</g>
+<!-- Right Wing (Near) -->
+<g class="bird-wing-right">
+<path d="M24 18 C31 10 39 6 46 9 C41 14 32 17 24 18 Z" fill="url(#violetWingGrad)"></path>
+<path d="M30 14 C36 9 42 7 46 9 C40 12 34 14 30 14 Z" fill="#EDE9FE" opacity="0.8"></path>
+</g>
+</svg>
+</div>
+</div>
+<!-- 🌸 EVENING MODE: Gentle Cherry Blossom Falling Petals -->
+<div class="evening-petals-layer" id="eveningPetals"></div>
+<!-- 🌙 NIGHT MODE: Twinkling Stars & Fireflies Canvas Container -->
 <div class="night-sky-particles" id="nightParticles"></div>
 <!-- Hero Content Inner Grid -->
 <div class="hero-inner">
 <div class="hero-text-block">
 <div class="hero-badge">
 <i class="fa-solid fa-graduation-cap"></i>
-<span class="">B.Tech CSE Student at KPGU, Vadodara</span>
+<span>B.Tech CSE Student at KPGU, Vadodara</span>
 </div>
 <h1 class="hero-title">Krishnakant Shukla</h1>
 <p class="hero-tagline">
@@ -1526,21 +1957,21 @@
         </p>
 <div class="hero-actions">
 <a class="btn-primary" href="#contact">
-<span class="">Get in Touch</span>
+<span>Get in Touch</span>
 <i class="fa-solid fa-arrow-right"></i>
 </a>
 <div class="social-pill-group">
 <a class="social-pill" href="https://github.com/krishnashukla074" rel="noopener noreferrer" target="_blank">
 <i class="fa-brands fa-github"></i>
-<span class="">GitHub</span>
+<span>GitHub</span>
 </a>
 <a class="social-pill" href="https://www.linkedin.com/in/krishnakant-shukla-274ba5382/" rel="noopener noreferrer" target="_blank">
 <i class="fa-brands fa-linkedin"></i>
-<span class="">LinkedIn</span>
+<span>LinkedIn</span>
 </a>
 <a class="social-pill" href="mailto:krishnashukla61899@gmail.com">
 <i class="fa-solid fa-envelope"></i>
-<span class="">Email</span>
+<span>Email</span>
 </a>
 </div>
 </div>
@@ -1554,12 +1985,12 @@
 </div>
 <div class="portrait-badge-tag">Hello! ✨</div>
 </div>
-<!-- Interactive Workbench: Character matching reference image -->
+<!-- Interactive Workbench: Preserved SVG character matching reference -->
 <div class="stickman-workbench" id="stickmanBox" title="Hover &amp; move cursor to interact!">
 <div class="workbench-header">
 <div class="workbench-status">
 <span class="status-dot"></span>
-<span class="" id="workbenchStatusText">Analyst at Work: Processing Data</span>
+<span id="workbenchStatusText">Analyst at Work: Processing Data</span>
 </div>
 <span class="workbench-hint">Look here ✦</span>
 </div>
@@ -1571,7 +2002,6 @@
 <div class="data-particle data-tag-c"><i class="fa-solid fa-bolt"></i> clean_data()</div>
 <svg class="stickman-svg" fill="none" viewbox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
 <defs>
-<!-- Gradients for 3D stylized character -->
 <radialgradient cx="38%" cy="32%" id="eggHeadGrad" r="62%">
 <stop offset="0%" stop-color="#FFFFFF"></stop>
 <stop offset="55%" stop-color="#F8FAFC"></stop>
@@ -1607,7 +2037,7 @@
 <!-- Chair back behind character -->
 <rect fill="#334155" height="65" opacity="0.65" rx="14" width="76" x="122" y="86"></rect>
 <rect fill="#1E293B" height="57" rx="11" width="68" x="126" y="90"></rect>
-<!-- Character Legs (Dark Indigo / Navy Jeans) seated behind desk -->
+<!-- Character Legs seated behind desk -->
 <path d="M136 142 L136 182" stroke="#1E293B" stroke-linecap="round" stroke-width="12"></path>
 <path d="M184 142 L184 182" stroke="#1E293B" stroke-linecap="round" stroke-width="12"></path>
 <!-- White Sneakers -->
@@ -1615,67 +2045,49 @@
 <ellipse cx="185" cy="186" fill="#FFFFFF" rx="9" ry="5" stroke="#CBD5E1" stroke-width="1.5"></ellipse>
 <!-- Character Upper Body facing viewer -->
 <g filter="url(#softShadow)" id="characterTorso">
-<!-- Back inner dark hood collar visible behind neck -->
 <path d="M132 86 C132 70 188 70 188 86 C184 94 136 94 132 86 Z" fill="url(#hoodInteriorGrad)"></path>
-<!-- White T-Shirt Center -->
 <path d="M145 88 L175 88 L172 145 L148 145 Z" fill="#F8FAFC"></path>
 <path d="M150 94 Q160 97 170 94" fill="none" stroke="#E2E8F0" stroke-width="2"></path>
-<!-- Electric Blue Jacket/Hoodie Outer Layers (Matching Reference) -->
-<!-- Left torso jacket flap -->
+<!-- Electric Blue Jacket/Hoodie Outer Layers -->
 <path d="M125 90 C125 90 144 88 146 102 L143 145 C135 145 125 142 124 134 Z" fill="url(#hoodieGrad)"></path>
-<!-- Right torso jacket flap -->
 <path d="M195 90 C195 90 176 88 174 102 L177 145 C185 145 195 142 196 134 Z" fill="url(#hoodieGrad)"></path>
-<!-- Black zipper and pocket accents like reference image -->
 <line stroke="#0F172A" stroke-linecap="round" stroke-width="1.5" x1="147" x2="147" y1="102" y2="142"></line>
 <line stroke="#0F172A" stroke-linecap="round" stroke-width="1.5" x1="173" x2="173" y1="102" y2="142"></line>
-<!-- Subtle hoodie drawstring / shoulder seams -->
 <line stroke="#0369A1" stroke-linecap="round" stroke-width="2" x1="133" x2="139" y1="116" y2="128"></line>
 <line stroke="#0369A1" stroke-linecap="round" stroke-width="2" x1="187" x2="181" y1="116" y2="128"></line>
-<!-- Left Arm in Blue Hoodie (typing towards keyboard) -->
+<!-- Left Arm in Blue Hoodie -->
 <g class="char-arm-l" id="charArmL">
 <path d="M126 95 C118 108 116 124 132 136 C136 139 144 140 150 140" fill="none" stroke="url(#hoodieGrad)" stroke-linecap="round" stroke-width="13"></path>
-<!-- Smooth white hand -->
 <circle cx="152" cy="140" fill="#FFFFFF" r="5"></circle>
 </g>
-<!-- Right Arm in Blue Hoodie (typing towards keyboard) -->
+<!-- Right Arm in Blue Hoodie -->
 <g class="char-arm-r" id="charArmR">
 <path d="M194 95 C202 108 204 124 188 136 C184 139 176 140 170 140" fill="none" stroke="url(#hoodieGrad)" stroke-linecap="round" stroke-width="13"></path>
-<!-- Smooth white hand -->
 <circle cx="168" cy="140" fill="#FFFFFF" r="5"></circle>
 </g>
 </g>
-<!-- CHARACTER HEAD: Smooth white spherical/egg head with iconic vertical black oval eyes -->
+<!-- CHARACTER HEAD -->
 <g class="head-rig default-head-bob" filter="url(#softShadow)" id="characterHeadRig">
-<!-- Egg Head Base -->
 <ellipse cx="160" cy="56" fill="url(#eggHeadGrad)" rx="27" ry="32"></ellipse>
-<!-- Gentle head 3D highlight on top-left -->
 <ellipse cx="150" cy="40" fill="#FFFFFF" opacity="0.65" rx="14" ry="10" transform="rotate(-15 150 40)"></ellipse>
-<!-- Interactive Pupils / Eyes Group (Track cursor) -->
+<!-- Eyes Group (Track cursor) -->
 <g class="pupils-group" id="characterEyes">
-<!-- Left Eye: Tall vertical black oval like reference -->
 <ellipse cx="151" cy="56" fill="#0F172A" rx="3.4" ry="7.2"></ellipse>
 <circle cx="152" cy="53" fill="#FFFFFF" r="1.1"></circle>
-<!-- Right Eye: Tall vertical black oval like reference -->
 <ellipse cx="169" cy="56" fill="#0F172A" rx="3.4" ry="7.2"></ellipse>
 <circle cx="170" cy="53" fill="#FFFFFF" r="1.1"></circle>
 </g>
-<!-- Subtle cute chin shadow / contour -->
 <path d="M154 75 Q160 78 166 75" fill="none" stroke="#CBD5E1" stroke-linecap="round" stroke-width="1.6"></path>
 </g>
-<!-- WORKBENCH DESK (Warm, clean wood aesthetic) -->
-<!-- Desk Top -->
+<!-- WORKBENCH DESK -->
 <rect fill="url(#deskWood)" filter="url(#deskShadow)" height="10" rx="4" width="236" x="42" y="142"></rect>
 <rect fill="#E8D7C0" height="3" opacity="0.6" width="236" x="42" y="142"></rect>
-<!-- Desk Legs -->
 <rect fill="#9C7A53" height="42" rx="3" width="8" x="58" y="152"></rect>
 <rect fill="#9C7A53" height="42" rx="3" width="8" x="254" y="152"></rect>
-<!-- LAPTOP ON DESK (Facing the user - back lid visible) -->
-<!-- Laptop Base resting on desk -->
+<!-- LAPTOP ON DESK -->
 <rect fill="#334155" height="4" rx="2" width="60" x="130" y="141"></rect>
-<!-- Back of Laptop Lid facing user directly -->
 <g id="laptopBackLid">
 <path d="M136 142 L141 114 C141 112 143 110 145 110 L175 110 C177 110 179 112 179 114 L184 142 Z" fill="url(#laptopLidGrad)" stroke="#1E293B" stroke-width="1.2"></path>
-<!-- Glowing Tech / Analytics Logo on Laptop Lid -->
 <circle class="laptop-logo-pulse" cx="160" cy="126" fill="#38BDF8" r="4.5"></circle>
 <circle cx="160" cy="126" fill="#FFFFFF" r="2.2"></circle>
 </g>
@@ -1683,13 +2095,11 @@
 <g transform="translate(220, 130)">
 <rect fill="#F87171" height="13" rx="3" width="13" x="0" y="4"></rect>
 <path d="M13 7 Q17 10.5 13 14" fill="none" stroke="#F87171" stroke-width="2"></path>
-<!-- Steam -->
 <path d="M4 1 Q7 -3 4 -7" fill="none" opacity="0.75" stroke="#94A3B8" stroke-linecap="round" stroke-width="1.5"></path>
 </g>
 <!-- Tiny succulent plant pot on desk -->
 <g transform="translate(80, 132)">
 <polygon fill="#E2E8F0" points="2,14 12,14 14,7 0,7"></polygon>
-<!-- Small green plant -->
 <ellipse cx="7" cy="6" fill="#34D399" rx="4" ry="4"></ellipse>
 <ellipse cx="4" cy="5" fill="#10B981" rx="2.5" ry="3"></ellipse>
 <ellipse cx="10" cy="5" fill="#10B981" rx="2.5" ry="3"></ellipse>
@@ -1702,11 +2112,8 @@
 <!-- Rolling Hills Silhouette (Ghibli Landscape) -->
 <div class="hills-layer">
 <svg class="hill-svg" preserveaspectratio="none" viewbox="0 0 1440 220">
-<!-- Far Hill -->
 <path class="hill-back" d="M0,130 C280,60 520,160 820,100 C1100,50 1320,120 1440,90 L1440,220 L0,220 Z"></path>
-<!-- Mid Hill -->
 <path class="hill-mid" d="M0,150 C240,110 460,190 740,140 C1020,90 1260,170 1440,130 L1440,220 L0,220 Z"></path>
-<!-- Foreground Hill -->
 <path class="hill-front" d="M0,180 C320,140 600,210 920,170 C1200,130 1360,190 1440,175 L1440,220 L0,220 Z"></path>
 </svg>
 </div>
@@ -1727,13 +2134,13 @@
         </p>
 <div class="handwritten-stamp">
 <i class="fa-solid fa-seedling"></i>
-<span class="">Curious mind, learning from the ground up</span>
+<span>Curious mind, learning from the ground up</span>
 </div>
 </div>
 </div>
 </section>
 <!-- 4. Skills Section -->
-<section class="content-section" id="skills" style="background: #FAF7F0;">
+<section class="content-section" id="skills">
 <div class="section-container">
 <div class="section-header-block">
 <span class="section-tagline">Chapter 02</span>
@@ -1743,23 +2150,23 @@
 <div class="skills-grid">
 <div class="skill-tag">
 <i class="fa-brands fa-python"></i>
-<span class="">Python</span>
+<span>Python</span>
 </div>
 <div class="skill-tag">
 <i class="fa-solid fa-code"></i>
-<span class="">C</span>
+<span>C</span>
 </div>
 <div class="skill-tag">
 <i class="fa-solid fa-terminal"></i>
-<span class="">C++</span>
+<span>C++</span>
 </div>
 <div class="skill-tag">
 <i class="fa-brands fa-html5"></i>
-<span class="">HTML</span>
+<span>HTML</span>
 </div>
 <div class="skill-tag">
 <i class="fa-brands fa-css3-alt"></i>
-<span class="">CSS</span>
+<span>CSS</span>
 </div>
 </div>
 <p class="skills-note">
@@ -1813,44 +2220,65 @@
 <div class="contact-links-grid">
 <a class="contact-button" href="mailto:krishnashukla61899@gmail.com">
 <i class="fa-solid fa-envelope"></i>
-<span class="">krishnashukla61899@gmail.com</span>
+<span>krishnashukla61899@gmail.com</span>
 </a>
 <a class="contact-button" href="https://github.com/krishnashukla074" rel="noopener noreferrer" target="_blank">
 <i class="fa-brands fa-github"></i>
-<span class="">github.com/krishnashukla074</span>
+<span>github.com/krishnashukla074</span>
 </a>
 <a class="contact-button" href="https://www.linkedin.com/in/krishnakant-shukla-274ba5382/" rel="noopener noreferrer" target="_blank">
 <i class="fa-brands fa-linkedin"></i>
-<span class="">LinkedIn Profile</span>
+<span>LinkedIn Profile</span>
 </a>
 </div>
 <div class="footer-quote">
         "Thanks for stopping by — hope you liked the sky." ☁️
       </div>
 <div class="footer-bottom">
-<div class="">© 2026 Krishnakant Shukla • Vadodara, India</div>
-<div class="" style="font-family: var(--font-hand); font-size: 1.15rem;">Crafted with warm memories &amp; code</div>
+<div>© 2026 Krishnakant Shukla • Vadodara, India</div>
+<div style="font-family: var(--font-hand); font-size: 1.15rem;">Crafted with warm memories &amp; code</div>
 </div>
 </div>
 </footer>
 <!-- Interactive JavaScript Logic -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // 1. Day / Night Mode Toggle
-      const themeToggleBtn = document.getElementById('themeToggleBtn');
-      const heroContainer = document.getElementById('hero');
-      const siteHeader = document.querySelector('.site-header');
-      const toggleIcon = document.getElementById('toggleIcon');
-      const toggleText = document.getElementById('toggleText');
+      // 1. Three Environmental Modes Cycle: Day (0) -> Evening (1) -> Night (2)
+      const modes = [
+        { id: 'day', name: 'Day Sky', icon: '☀️' },
+        { id: 'evening', name: 'Evening Sky', icon: '🌸' },
+        { id: 'night', name: 'Night Sky', icon: '🌙' }
+      ];
+      let currentModeIndex = 0;
+
+      const modeCycleBtn = document.getElementById('modeCycleBtn');
+      const modeIcon = document.getElementById('modeIcon');
+      const modeText = document.getElementById('modeText');
+
+      const eveningPetals = document.getElementById('eveningPetals');
       const nightParticles = document.getElementById('nightParticles');
 
-      let isNight = false;
+      // Initialize evening cherry blossom petals
+      function initEveningPetals() {
+        eveningPetals.innerHTML = '';
+        for (let i = 0; i < 22; i++) {
+          const petal = document.createElement('div');
+          petal.className = 'petal';
+          const width = Math.random() * 8 + 10;
+          const height = width * 1.35;
+          petal.style.width = `${width}px`;
+          petal.style.height = `${height}px`;
+          petal.style.left = `${Math.random() * 95}%`;
+          petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
+          petal.style.animationDelay = `${Math.random() * 8}s`;
+          eveningPetals.appendChild(petal);
+        }
+      }
 
-      // Populate stars and fireflies in particles container
+      // Initialize night stars and fireflies
       function initNightSky() {
         nightParticles.innerHTML = '';
-        
-        // Create 45 twinkling stars
+        // 45 twinkling stars
         for (let i = 0; i < 45; i++) {
           const star = document.createElement('div');
           star.className = 'star';
@@ -1864,7 +2292,7 @@
           nightParticles.appendChild(star);
         }
 
-        // Create 12 gently floating fireflies
+        // 12 gently floating fireflies
         for (let i = 0; i < 12; i++) {
           const firefly = document.createElement('div');
           firefly.className = 'firefly';
@@ -1876,25 +2304,21 @@
         }
       }
 
+      initEveningPetals();
       initNightSky();
 
-      themeToggleBtn.addEventListener('click', () => {
-        isNight = !isNight;
-        if (isNight) {
-          heroContainer.classList.add('night-mode');
-          document.body.classList.add('night-mode');
-          if (siteHeader) siteHeader.classList.add('night-mode');
-          toggleIcon.className = 'fa-solid fa-sun';
-          toggleIcon.style.color = '#FDE047';
-          toggleText.textContent = 'Day Sky';
-        } else {
-          heroContainer.classList.remove('night-mode');
-          document.body.classList.remove('night-mode');
-          if (siteHeader) siteHeader.classList.remove('night-mode');
-          toggleIcon.className = 'fa-solid fa-moon';
-          toggleIcon.style.color = '#334155';
-          toggleText.textContent = 'Night Sky';
-        }
+      function applyMode(index) {
+        document.body.classList.remove('day-mode', 'evening-mode', 'night-mode');
+        const mode = modes[index];
+        document.body.classList.add(`${mode.id}-mode`);
+
+        modeIcon.textContent = mode.icon;
+        modeText.textContent = mode.name;
+      }
+
+      modeCycleBtn.addEventListener('click', () => {
+        currentModeIndex = (currentModeIndex + 1) % modes.length;
+        applyMode(currentModeIndex);
       });
 
       // 2. Interactive Character Mouse Tracking & Attention Dynamics
@@ -1910,16 +2334,13 @@
 
       stickmanBox.addEventListener('mousemove', (e) => {
         const rect = stickmanBox.getBoundingClientRect();
-        // Calculate normalized cursor coordinate (-1 to 1)
         const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
 
-        // Subtle head tilt & tilt angle towards pointer
-        const headTiltX = x * 7; // -7deg to 7deg
+        const headTiltX = x * 7;
         const headShiftX = x * 4;
-        const headShiftY = y * 3 - 2; // subtle upward gaze
+        const headShiftY = y * 3 - 2;
 
-        // Pupil tracking offset
         const pupilShiftX = x * 3.5;
         const pupilShiftY = y * 2.5;
 
@@ -1928,7 +2349,6 @@
       });
 
       stickmanBox.addEventListener('mouseleave', () => {
-        // Immediate clean reset without delay
         characterHeadRig.style.transform = '';
         characterEyes.style.transform = '';
         stickmanBox.classList.remove('is-alerted');
@@ -1946,12 +2366,10 @@
             }
           });
         }, {
-          threshold: 0.3
+          threshold: 0.25
         });
 
-        sectionTitles.forEach(title => {
-          observer.observe(title);
-        });
+        sectionTitles.forEach(title => observer.observe(title));
       } else {
         sectionTitles.forEach(title => title.classList.add('drawn-in'));
       }
